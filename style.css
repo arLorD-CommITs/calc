@@ -59,6 +59,9 @@ html {
     border-radius: 15px;
     font-size: 32px;
     font-weight: 900;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .keypad {
