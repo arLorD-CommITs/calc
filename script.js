@@ -1,5 +1,6 @@
-let num1 = 5;
-let num2 = 6;
+let num1 = 120;
+let num2 = 3;
+let opString = "*";
 let operators = {
     '+': (num1, num2) => num1 + num2,
     '-': (num1, num2) => num1 - num2,
