@@ -1,63 +1,53 @@
-function operate (arr) {
-    switch (arr[1]) {
-     case '+':
-         return operators["+"](arr[0], arr[2]);
-     case '-':
-         return operators['-'](arr[0], arr[2]);
-     case '*':
-         return operators['*'](arr[0], arr[2]);
-     case '/':
-         return operators['/'](arr[0], arr[2]);
-    }
- }
- 
- function populateDisplay() {
-    if (this.className === "clear-btn") {
-      display.textContent = "";
-    } else if (this.className === "equals-btn") {
-      
-      let displayValue = display.textContent;
-      let newDisplayValue = [];
-
-      if (displayValue.includes("+") === true) {
-        newDisplayValue = displayValue.split("+");
-        newDisplayValue.splice(1, 0, "+");
-        console.log(newDisplayValue);
-      } else if (displayValue.includes("-") === true) {
-        newDisplayValue = displayValue.split("-");
-        newDisplayValue.splice(1, 0, "-");
-        console.log(newDisplayValue);
-      } else if (displayValue.includes("*") === true) {
-        newDisplayValue = displayValue.split("*");
-        newDisplayValue.splice(1, 0, "*");
-        console.log(newDisplayValue);
-      } else if (displayValue.includes("/") === true) {
-        newDisplayValue = displayValue.split("/");
-        newDisplayValue.splice(1, 0, "/");
-        console.log(newDisplayValue);
-      } 
-
-
-
-      display.textContent = operate(newDisplayValue);
-    } 
-    else {
-        
-      display.textContent += this.textContent;
-    }
-  }
-
-let operators = {
-    '+': (num1, num2) => num1 + num2,
-    '-': (num1, num2) => num1 - num2,
-    '*': (num1, num2) => num1 * num2,
-    '/': (num1, num2) => num1 / num2,
-};
-
-const buttons = document.querySelectorAll('.keypad button');
-buttons.forEach((btn) => {
-    btn.addEventListener("click", populateDisplay);
+const numberButtons = document.querySelectorAll(".number");
+numberButtons.forEach((button) => {
+  button.addEventListener("click", useNumberButtons)
 });
-const display = document.querySelector('.display');
+
+const display = document.querySelector(".display");
+
+let displayValue;
+let num1 = 0;
+let num2 = 0;
+let op;
+
+
+function useNumberButtons() {
+  if (display.textContent === "0") {
+    display.textContent = this.textContent;
+  } else {
+    display.textContent += this.textContent;
+  }
+}
+
+function operate(num1, num2, op) {
+  switch (op) {
+    case "+":
+      return add(num1, num2);
+    case "-":
+      return subtract(num1, num2);
+    case "*": 
+      return multiply(num1, num2);
+    case "÷":
+      return divide(num1, num2);
+  }
+}
+
+function add(num1, num2) {
+  return num1 + num2;
+}
+
+function subtract(num1, num2) {
+  return num1 - num2;
+}
+
+function multiply(num1, num2) {
+  return num1 * num2;
+}
+
+function divide(num1, num2) {
+  return num1 / num2;
+}
+
+
 
 
