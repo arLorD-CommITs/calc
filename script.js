@@ -11,6 +11,17 @@ operatorButtons.forEach((button) => {
   button.addEventListener("click", useOperatorButtons)
 });
 
+const percentButton = document.querySelector(".percent-btn");
+percentButton.addEventListener("click", () => {
+  let num = Number(display.textContent);
+  if (num === 0) {
+    display.textContent = "0";
+  } else {
+    display.textContent = num*0.01; 
+  }
+  displayValue = display.textContent;
+});
+
 const display = document.querySelector(".display");
 
 let displayValue = "";
@@ -128,5 +139,5 @@ function processDecimals(num) {
   } else {
     return num;
   }
-}
+ }
 }

@@ -105,3 +105,7 @@ button:active {
     transform: scale(1.1);
 }
 
+.operator {
+    background-color: rgb(176, 176, 238);
+}
+
