@@ -22,6 +22,20 @@ percentButton.addEventListener("click", () => {
   displayValue = display.textContent;
 });
 
+const decimalPointButton = document.querySelector(".point-btn");
+decimalPointButton.addEventListener("click", function() {
+  let num = Number(display.textContent);
+  if (num === 0 || !numberConcatenates || display.textContent === "LOL!" || equalsButtonWasLast === true) {
+    display.textContent = "0."
+    numberConcatenates = true;
+    equalsButtonWasLast = false;
+  } else if (Array.from(display.textContent).includes(".")) {
+    display.textContent = display.textContent;
+  } else {
+    display.textContent += ".";
+  }
+});
+
 const display = document.querySelector(".display");
 
 let displayValue = "";
