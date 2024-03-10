@@ -98,3 +98,10 @@ button:active {
     color: rgb(7, 27, 135);
     transform: scale(1.1);
 }
+
+.active {
+    background-color: #22dfec;
+    color: rgb(7, 27, 135);
+    transform: scale(1.1);
+}
+

@@ -3,19 +3,78 @@ numberButtons.forEach((button) => {
   button.addEventListener("click", useNumberButtons)
 });
 
+const clear = document.querySelector(".clear-btn");
+clear.addEventListener("click", clearButton);
+
+const operatorButtons = document.querySelectorAll(".operator");
+operatorButtons.forEach((button) => {
+  button.addEventListener("click", useOperatorButtons)
+});
+
 const display = document.querySelector(".display");
 
-let displayValue;
+let displayValue = "";
 let num1 = 0;
 let num2 = 0;
-let op;
-
+let operator = "";
+let operating = false;
+let numberConcatenates = true;
+let equalsButtonWasLast = false;
 
 function useNumberButtons() {
-  if (display.textContent === "0") {
+  if (display.textContent === "0" || !numberConcatenates || display.textContent === "LOL!" || equalsButtonWasLast === true) {
     display.textContent = this.textContent;
+    numberConcatenates = true;
+    equalsButtonWasLast = false;
   } else {
     display.textContent += this.textContent;
+  }
+  displayValue = display.textContent;
+}
+
+function clearButton() {
+  display.textContent = "0";
+  num1, num2 = 0;
+  operator = "";
+  displayValue = display.textContent;
+  operating = false;
+  equalsButtonWasLast = false;
+  operatorButtons.forEach((button) => {
+    button.classList.remove("active")
+  });
+  operating = false;
+}
+
+function useOperatorButtons() {
+  if (this.textContent === "=" && operating === false) {
+    alert("That's not how you use a calculator. Input numbers first, select an operator, then click another operator or the equals button to compute.");
+    clearButton();
+
+  } else if (display.textContent === "LOL!") {
+    clearButton();
+    
+  } else if (operating) {
+    let index = displayValue.indexOf(operator);
+    num2 = displayValue.substring(index + 1);
+    num1 = operate(+num1, +num2, operator);
+    display.textContent = processDecimals(num1).toString();
+
+    operatorButtons.forEach((button) => {
+      button.classList.remove("active")
+    });
+    operating = false;
+
+    (this.textContent === "=") ? equalsButtonWasLast = true : equalsButtonWasLast = false;
+
+  } else if (!operating){
+    displayValue = display.textContent;
+    num1 = +displayValue;
+    operator = this.textContent;
+    
+    operating = true;
+    numberConcatenates = false;
+    this.classList.add("active");
+
   }
 }
 
@@ -45,9 +104,23 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
+  if (num2 === 0) {
+    return "LOL!"
+  } 
   return num1 / num2;
 }
 
+function processDecimals(num) {
+  let index = num.toString().indexOf(".");
+  if (index < 0) {
+    return num;
+  } else {
+  let decimal = num.toString().substring(index + 1);
 
-
-
+  if (decimal.length > 2) {
+    return num.toFixed(2);
+  } else {
+    return num;
+  }
+}
+}
