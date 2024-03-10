@@ -36,6 +36,18 @@ decimalPointButton.addEventListener("click", function() {
   }
 });
 
+const backSpace = document.querySelector(".back-space");
+backSpace.addEventListener("click", () => {
+  let string = display.textContent;
+  if (string === "0" || string === "LOL!") {
+    display.textContent = display.textContent;
+  } else if (string === "LOL!" || string.length === 1) {
+    display.textContent = "0";
+  } else {
+    display.textContent = string.slice(0, -1);
+  }
+});
+
 const display = document.querySelector(".display");
 
 let displayValue = "";
