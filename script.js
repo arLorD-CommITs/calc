@@ -54,17 +54,23 @@ function useOperatorButtons() {
     clearButton();
     
   } else if (operating) {
-    let index = displayValue.indexOf(operator);
-    num2 = displayValue.substring(index + 1);
+    num2 = display.textContent;
+
     num1 = operate(+num1, +num2, operator);
     display.textContent = processDecimals(num1).toString();
 
     operatorButtons.forEach((button) => {
       button.classList.remove("active")
     });
-    operating = false;
 
-    (this.textContent === "=") ? equalsButtonWasLast = true : equalsButtonWasLast = false;
+    if (this.textContent === "=") {
+      operating = false;
+      equalsButtonWasLast = true;
+    } else {
+      this.classList.add("active");
+      numberConcatenates = false;
+      operator = this.textContent;
+    }
 
   } else if (!operating){
     displayValue = display.textContent;
