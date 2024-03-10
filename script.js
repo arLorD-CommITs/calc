@@ -25,7 +25,7 @@ percentButton.addEventListener("click", () => {
 const decimalPointButton = document.querySelector(".point-btn");
 decimalPointButton.addEventListener("click", function() {
   let num = Number(display.textContent);
-  if (num === 0 || !numberConcatenates || display.textContent === "LOL!" || equalsButtonWasLast === true) {
+  if (num === 0 || !numberConcatenates || display.textContent === "LOL!") {
     display.textContent = "0."
     numberConcatenates = true;
     equalsButtonWasLast = false;
@@ -33,6 +33,7 @@ decimalPointButton.addEventListener("click", function() {
     display.textContent = display.textContent;
   } else {
     display.textContent += ".";
+    equalsButtonWasLast = false;
   }
 });
 
@@ -45,6 +46,18 @@ backSpace.addEventListener("click", () => {
     display.textContent = "0";
   } else {
     display.textContent = string.slice(0, -1);
+  }
+});
+
+const positiveNegative = document.querySelector(".positive-negative");
+positiveNegative.addEventListener("click", () => {
+  let num = display.textContent;
+  if (num === 0) {
+    display.textContent = num.toString();
+  } else if (num > 0) {
+    display.textContent = -Math.abs(num);
+  } else if (num < 0) {
+    display.textContent = Math.abs(num);
   }
 });
 
